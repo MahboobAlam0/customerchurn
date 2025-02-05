@@ -12,7 +12,6 @@ if not os.path.exists("model.pkl"):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, "logistic_model.pkl", quiet=False)
 
-<<<<<<< HEAD
 # Load model
 with open("logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -27,10 +26,6 @@ if not os.path.exists("model.pkl"):
 with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
->>>>>>> c72cfa4ecabe6782bb14f57ba6bc2203df90827a
-
-=======
->>>>>>> 315d23b955cde47129a94b4f0adb194f1a11af7e
 import numpy as np
 
 def predict_churn(features):
