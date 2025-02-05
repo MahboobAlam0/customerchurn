@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import gzip
+import os
 
 # Page configuration
 st.set_page_config(
@@ -11,16 +12,19 @@ st.set_page_config(
     layout="centered"
 )
 
+model_file_path = "model.pkl.gz"
 
-@st.cache_resource
-def load_model():
-    with gzip.open("https://github.com/MahboobAlam0/customerchurn/blob/c6a1ac30dc6db2bb8eb87027057822d3d4cd4576/CustomerChurnWeb/model.pkl.gz", "rb") as f:
+st.write(f"Current directory: {os.getcwd()}")
+st.write(f"Attempting to load model from: {model_file_path}")
+
+try:
+    with gzip.open(model_file_path, "rb") as f:
         model = pickle.load(f)
-        return model
-
-model = load_model()
-
-import numpy as np
+    st.write("Model loaded successfully!")
+except FileNotFoundError:
+    st.error("Model file not found.")
+except Exception as e:
+    st.error(f"Error occurred: {e}")
 
 def predict_churn(features):
     # Replace categorical values in the feature list
