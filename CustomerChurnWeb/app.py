@@ -14,7 +14,7 @@ st.set_page_config(
 
 @st.cache_resource
 def load_model():
-    with gzip.open("model.pkl.gz", "rb") as f:
+    with gzip.open("CustomerChurnWeb/model.pkl.gz", "rb") as f:
         model = pickle.load(f)
         return model
 
