@@ -13,14 +13,9 @@ st.set_page_config(
 )
 
 model_file_path = "/mount/src/customerchurn/model.pkl.gz"
-
-st.write(f"Current directory: {os.getcwd()}")
-st.write(f"Attempting to load model from: {model_file_path}")
-
 try:
     with gzip.open(model_file_path, "rb") as f:
         model = pickle.load(f)
-    st.write("Model loaded successfully!")
 except FileNotFoundError:
     st.error("Model file not found.")
 except Exception as e:
