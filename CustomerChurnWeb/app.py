@@ -2,15 +2,21 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+<<<<<<< HEAD
 import gdown
 import os
+=======
+import gzip
+>>>>>>> bf80229 (Modified Code)
 
-file_id = "1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw"
-# Download model if not already present
-if not os.path.exists("model.pkl"):
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, "logistic_model.pkl", quiet=False)
+# Page configuration
+st.set_page_config(
+    page_title="Customer Churn Predictor",
+    page_icon="🔄",
+    layout="centered"
+)
 
+<<<<<<< HEAD
 # Load model
 with open("logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -20,19 +26,42 @@ file_id = "https://drive.google.com/file/d/1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw/vie
 if not os.path.exists("model.pkl"):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, "model.pkl", quiet=False)
+=======
+# file_id = "1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw"
+# # Download model if not already present
+# if not os.path.exists("model.pkl"):
+#     url = f"https://drive.google.com/uc?id={file_id}"
+#     gdown.download(url, "logistic_model.pkl", quiet=False)
+>>>>>>> bf80229 (Modified Code)
 
-# Load model
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
+# # Load model
+# with open("logistic_model.pkl", "rb") as f:
+#     model = pickle.load(f)
+    
+# file_id = "https://drive.google.com/file/d/1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw/view?usp=sharing"
+# # Download model if not already present
+# if not os.path.exists("model.pkl"):
+#     url = f"https://drive.google.com/uc?id={file_id}"
+#     gdown.download(url, "model.pkl", quiet=False)
 
+<<<<<<< HEAD
+=======
+@st.cache_resource
+def load_model():
+    with gzip.open("model.pkl.gz", "rb") as f:
+        model = pickle.load(f)
+        return model
+
+model = load_model()
+print(type(model))
+
+# with gzip.open("model.pkl.gz", "rb") as f:
+#     model = pickle.load(f)
+    
+>>>>>>> bf80229 (Modified Code)
 import numpy as np
 
 def predict_churn(features):
-    # Convert categorical features to numeric
-    gender_encoded = 1 if features[6] == "Male" else 0  # Assuming Male = 1, Female = 0
-    phone_service_encoded = 1 if features[7] == "Yes" else 0  # Yes = 1, No = 0
-    multipleLines_encoded = 1 if features[8] == "Yes" else 0  # Yes = 1, No = 0
-    
     # Replace categorical values in the feature list
     numeric_features = [
         features[0],  # tenure
@@ -41,9 +70,6 @@ def predict_churn(features):
         features[3],  # contract_type_encoded
         features[4],  # payment_method_encoded
         features[5],  # internet_service_encoded
-        gender_encoded,
-        phone_service_encoded, 
-        multipleLines_encoded
     ]
 
     # Convert to NumPy array and reshape for model input
@@ -58,12 +84,7 @@ def load_css(css_file):
     with open(css_file) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Page configuration
-st.set_page_config(
-    page_title="Customer Churn Predictor",
-    page_icon="🔄",
-    layout="centered"
-)
+
 
 # Load CSS
 load_css('style.css')
@@ -92,8 +113,6 @@ with st.form("churn_prediction_form"):
         tenure = st.number_input("Tenure (months)", min_value=0, value=0)
         monthly_charges = st.number_input("Monthly Charges ($)", min_value=0.0, value=0.0)
         total_charges = st.number_input("Total Charges ($)", min_value=0.0, value=0.0)
-        gender = st.selectbox("Select Gender", ["Male", "Female"])  
-    
     with col2:
         contract_type = st.selectbox(
             "Contract Type",
@@ -106,12 +125,6 @@ with st.form("churn_prediction_form"):
         internet_service = st.selectbox(
             "Internet Service",
             ["DSL", "Fiber optic", "No"]
-        )
-        phone_service = st.selectbox(
-            "Phone Service", ["Yes", "No"]
-        )
-        multipleLines = st.selectbox(
-            "Multiple Lines", ["Yes", "No"]
         )
     
     submit_button = st.form_submit_button("Predict Churn Probability")
@@ -131,13 +144,11 @@ if submit_button:
         contract_type_encoded,
         payment_method_encoded,
         internet_service_encoded, 
-        gender, 
-        phone_service,
-        multipleLines
     ]
     
     # Get prediction
     churn_probability = predict_churn(features)
+    print(churn_probability)
     
     # Display results with nice formatting
     st.markdown("---")
