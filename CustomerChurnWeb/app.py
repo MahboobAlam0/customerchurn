@@ -19,7 +19,6 @@ def load_model():
         return model
 
 model = load_model()
-print(type(model))
 
 import numpy as np
 
