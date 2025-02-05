@@ -14,7 +14,7 @@ if not os.path.exists("model.pkl"):
 # Load model
 with open("logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
-=======
+
 file_id = "https://drive.google.com/file/d/1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw/view?usp=sharing"
 # Download model if not already present
 if not os.path.exists("model.pkl"):
