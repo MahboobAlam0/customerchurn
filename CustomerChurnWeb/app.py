@@ -2,9 +2,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import gdown
+import os
 
+file_id = "1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw"
+# Download model if not already present
+if not os.path.exists("model.pkl"):
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, "logistic_model.pkl", quiet=False)
 
-model = pickle.load(open('logistic_model.pkl','rb'))
+# Load model
+with open("logistic_model.pkl", "rb") as f:
+    model = pickle.load(f)
 
 import numpy as np
 
