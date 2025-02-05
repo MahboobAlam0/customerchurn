@@ -11,9 +11,22 @@ if not os.path.exists("model.pkl"):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, "logistic_model.pkl", quiet=False)
 
+<<<<<<< HEAD
 # Load model
 with open("logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
+=======
+file_id = "https://drive.google.com/file/d/1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw/view?usp=sharing"
+# Download model if not already present
+if not os.path.exists("model.pkl"):
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, "model.pkl", quiet=False)
+
+# Load model
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+>>>>>>> c72cfa4ecabe6782bb14f57ba6bc2203df90827a
 
 import numpy as np
 
