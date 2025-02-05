@@ -13,7 +13,6 @@ st.set_page_config(
 )
 
 model_file_path = "/mount/src/customerchurn/customerchurnweb/model.pkl.gz"
-"
 
 st.write(f"Current directory: {os.getcwd()}")
 st.write(f"Attempting to load model from: {model_file_path}")
