@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+<<<<<<< HEAD
 import gdown
 import os
 
@@ -28,6 +29,8 @@ with open("model.pkl", "rb") as f:
 
 >>>>>>> c72cfa4ecabe6782bb14f57ba6bc2203df90827a
 
+=======
+>>>>>>> 315d23b955cde47129a94b4f0adb194f1a11af7e
 import numpy as np
 
 def predict_churn(features):
