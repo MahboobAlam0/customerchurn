@@ -2,21 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-import gdown
-import os
-
-
-file_id = "https://drive.google.com/file/d/1ipFMaIZ3mptFeIIT1q_ecwpMqxwYjhXw/view?usp=sharing"
-# Download model if not already present
-if not os.path.exists("model.pkl"):
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, "model.pkl", quiet=False)
-
-# Load model
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
-
-
 import numpy as np
 
 def predict_churn(features):
